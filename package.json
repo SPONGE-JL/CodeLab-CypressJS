@@ -43,6 +43,7 @@
   },
   "homepage": "https://dev-chloe.github.io/hangout-nwitter-with-nomad",
   "devDependencies": {
+    "cypress": "^10.7.0",
     "eslint": "^8.18.0",
     "eslint-plugin-react": "^7.30.1"
   }
