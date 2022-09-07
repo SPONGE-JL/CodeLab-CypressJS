@@ -207,12 +207,28 @@ npx create-react-app hangout-nwitter-with-nomad
     ```bash
     # Install
     npm install --save-dev cypress
-
-    # Open with initiation
-    npx cypress open
     ```
 
-    - check [`cypress.config.js`](cypress.config.js)
+    - add `scripts` at [`package.json`](package.json#L27)
+
+      ```plaintext
+      "cypress:open": "$(npm bin)/cypress open",
+      ```
+
+      ```bash
+      # Open with initiation
+      npm run cypress:open
+      ```
+
+      check [`cypress.config.js`](cypress.config.js)
+
+    - add plugin for cypress
+
+      ```bash
+      npm install --save-dev eslint-plugin-cypress
+      ```
+
+      check [`.eslintrc.js`](./.eslintrc.js)
 
 ## certification
 

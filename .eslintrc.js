@@ -3,12 +3,14 @@ module.exports = {
     "browser": true,
     "es2021": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:cypress/recommended" // Ref. https://github.com/cypress-io/eslint-plugin-cypress#readme
   ],
   "parserOptions": {
     "ecmaFeatures": {
