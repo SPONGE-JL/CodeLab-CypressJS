@@ -40,7 +40,7 @@ const Form = ({ isNewAccount, toggleForm }) => {
       <Input type="password" onChange={onChange} placeholder="Password" />
       <ToggleButton type="submit" classNm={`${style.input} ${style.submit}`} text={isNewAccount ? "Create Account" : "Login"} />
       {error && <span className={style.error}>{error}</span>}
-      <ToggleButton type="button" classNm={style.switch} toggleForm={toggleForm} text={isNewAccount ? "Sign In" : "Create Account"} />
+      <ToggleButton type="button" classNm={style.switch} text={isNewAccount ? "Sign In" : "Create Account"} buttonId="signUpToggle" toggleForm={toggleForm}/>
     </form>
   );
 };
@@ -58,8 +58,8 @@ const Input = ({ type, placeholder, onChange }) => {
   );
 };
 
-const ToggleButton = ({ toggleForm, text, classNm, type }) => (
-  <input type={type} className={classNm} value={text} onClick={toggleForm && toggleForm} />
+const ToggleButton = ({ type, classNm, text, buttonId, toggleForm }) => (
+  <input type={type} className={classNm} value={text} id={buttonId} onClick={toggleForm && toggleForm} />
 );
 
 Form.propTypes = {
@@ -74,10 +74,11 @@ Input.propTypes = {
 };
 
 ToggleButton.propTypes = {
-  toggleForm: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   classNm: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  buttonId: PropTypes.string,
+  toggleForm: PropTypes.func
 };
 
 export default LoginForm;
