@@ -209,15 +209,20 @@ npx create-react-app hangout-nwitter-with-nomad
     npm install --save-dev cypress
     ```
 
-    - add `scripts` at [`package.json`](package.json#L27)
+    - add `scripts` at [`package.json`](package.json#L27-L29)
 
       ```plaintext
+      "e2e": "npm run cypress:run",
+      "cypress:run": "$(npm bin)/cypress run",
       "cypress:open": "$(npm bin)/cypress open",
       ```
 
       ```bash
       # Open with initiation
       npm run cypress:open
+
+      # Run in headless mode
+      npm run e2e
       ```
 
       check [`cypress.config.js`](cypress.config.js)
