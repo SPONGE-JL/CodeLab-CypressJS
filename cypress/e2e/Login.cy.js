@@ -39,6 +39,14 @@ describe("Try 'Sign In'", () => {
     cy.visit("/");
   });
 
+  /*
+    ! TODO
+    > 1. 랜덤 이메일 생성
+    > 2. 해당 이메일로 신규 계정 생성 및 로그아웃 테스트
+    > 3. 해당 이메일로 틀린 비밀번호일 때 이메일 생성 테스트
+    > 4. 해당 이메일로 틀린 비밀번호일 때 로그인 테스트
+    > 5. 해당 이메일로 맞는 비밀번호일 때 로그인 테스트
+   */
   it("should be success to 'Sign In' step from 'Create Account' step", () => {
     // Try 'Create Account'
     cy.submitAuthForm(email, `wrong-${password}`);
@@ -47,7 +55,7 @@ describe("Try 'Sign In'", () => {
     // Try 'Sign In'
     cy.toggle("#signUpToggle");
     cy.clickSubmit();
-    // cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
+    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
 
     // Try 'Sign In' with right info
     cy.submitAuthForm(email, password);
