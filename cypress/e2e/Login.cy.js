@@ -46,6 +46,7 @@ describe("Try 'Sign In'", () => {
     > 3. 해당 이메일로 틀린 비밀번호일 때 이메일 생성 테스트
     > 4. 해당 이메일로 틀린 비밀번호일 때 로그인 테스트
     > 5. 해당 이메일로 맞는 비밀번호일 때 로그인 테스트
+    > 6. 회원 탈퇴 테스트
    */
   it("should be success to 'Sign In' step from 'Create Account' step", () => {
     // Try 'Create Account'
@@ -55,12 +56,11 @@ describe("Try 'Sign In'", () => {
     // Try 'Sign In'
     cy.toggle("#signUpToggle");
     cy.clickSubmit();
-    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
+    cy.checkAuthResult();
 
     // Try 'Sign In' with right info
     cy.submitAuthForm(email, password);
-    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.")
-      .should("not.exist");
+    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.").should("not.exist");
   });
 
   it("should be rendered 'SSO buttons'", () => {
