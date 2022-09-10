@@ -3,8 +3,11 @@ describe("Landing", () => {
     cy.removeAllCaches();
   });
 
-  it("should be rendered default components - navigator, footer", () => {
-    cy.get("nav").get("a").should("have.attr", "href", "#/");
+  it("should be rendered default components - Navigator, Footer", () => {
+    // Navigator
+    cy.get("nav a").should("have.attr", "href", "#/");
+
+    // Footer
     cy.get("footer").contains("© 2022 Nwitter by Chloe");
   });
 

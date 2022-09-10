@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -38,6 +39,7 @@ Cypress.Commands.add("registNewUser", () => {
   const randomEmail = `auto_ui_tester-no.${timestamp}@nwitter.com`;
   const password = "Cypress*P@SSWORD";
   cy.submitAuthForm(randomEmail, password);
+  cy.wait(1500);
 });
 
 Cypress.Commands.add("submitAuthForm", (email, password) => {
@@ -62,5 +64,11 @@ Cypress.Commands.add("logout", () => {
 
 Cypress.Commands.add("withdrawal", () => {
   cy.visit("/#/profile");
-  cy.get("#withdrawal").click();
+  cy.wait(1200);
+  cy.get("button#withdrawal").trigger("mouseover").click();
+  cy.on("window:confirm", (alertMessage) => {
+    expect(alertMessage).to.equal("[확인] 회원 탈퇴를 진행합니다. (삭제된 계정은 복구가 불가능합니다.)");
+    return true;
+  });
+  cy.wait(800);
 });

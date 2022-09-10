@@ -46,7 +46,7 @@ describe("Auth / Login", () => {
       });
   });
 
-  it(`Step4. Withdrawal after login- ${randomEmail}`, () => {
+  it(`Step4. Withdrawal after login - ${randomEmail}`, () => {
     // Toggle: Regist -> Login
     cy.swithAuthMode();
     // Exist user with right password
