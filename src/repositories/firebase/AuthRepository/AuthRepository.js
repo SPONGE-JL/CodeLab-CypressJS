@@ -1,11 +1,11 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, deleteUser } from "firebase/auth";
 import { auth } from "../Firebase";
 
 const createNewAccount = async ({
   email,
   password,
   callbackError = (error) => {
-    console.log(("[ERROR] createNewAccount >", error));
+    console.log((`[ERROR] createNewAccount >: ${error}`));
   }
 }) => {
   await createUserWithEmailAndPassword(auth, email, password)
@@ -16,7 +16,7 @@ const signIn = async ({
   email,
   password,
   callbackError = (error) => {
-    console.log(("[ERROR] signIn >", error));
+    console.log((`[ERROR] signIn >, ${error}`));
   }
 }) => {
   await signInWithEmailAndPassword(auth, email, password).catch(callbackError);
@@ -45,13 +45,23 @@ const saveProfile = async (
     .catch((error) => errorCallback(error));
 };
 
+const removeUser = async (
+  successCallback = () => console.error("[FIXME] Not implemented! (for then) >"),
+  errorCallback = (error) => console.error("[FIXME] Not implemented! (for catch) >", error)
+) => {
+  deleteUser(auth.currentUser)
+    .then(() => successCallback())
+    .catch((error) => errorCallback(error));
+};
+
 const AuthRepository = {
   createNewAccount,
   signIn,
   signInWithAuthProvider,
   signOut,
   checkAuthState,
-  saveProfile
+  saveProfile,
+  removeUser
 };
 
 export default AuthRepository;

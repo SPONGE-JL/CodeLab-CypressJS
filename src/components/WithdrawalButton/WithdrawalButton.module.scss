@@ -1,0 +1,11 @@
+@import "./function.scss";
+
+.withdrawal {
+  background-color: rgb(79, 79, 79) !important;
+  opacity: 5%;
+  transition: opacity 0.4s;
+  
+  &:hover {
+    opacity: 50%;
+  }
+}

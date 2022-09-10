@@ -4,6 +4,7 @@ import ProfileForm from "components/ProfileForm";
 import NweetList from "components/NweetList";
 import NweetService from "services/NweetService";
 import LogoutButton from "components/LogoutButton";
+import WithdrawalButton from "components/WithdrawalButton";
 
 const Profile = ({ refreshUser, userObj }) => {
   const [nweetList, setNweetList] = useState([]);
@@ -15,6 +16,7 @@ const Profile = ({ refreshUser, userObj }) => {
     <div className="container">
       <ProfileForm userObj={userObj} callAfterUpdateProfile={refreshUser} />
       <LogoutButton refreshUser={refreshUser} />
+      <WithdrawalButton refreshUser={refreshUser} />
       <NweetList creatorId={creatorId} nweetList={nweetList} />
     </div>
   );

@@ -23,7 +23,6 @@ describe("Auth / Login", () => {
   it("Step3. Login error when wrong info", () => {
     // Toggle: Regist -> Login
     cy.swithAuthMode();
-
     // No exist user
     cy.submitAuthForm(`wrong-${randomEmail}`, `wrong-${password}`);
     cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
@@ -50,11 +49,16 @@ describe("Auth / Login", () => {
   it(`Step4. Withdrawal after login- ${randomEmail}`, () => {
     // Toggle: Regist -> Login
     cy.swithAuthMode();
-
-    // Exist user wiht right password
+    // Exist user with right password
     cy.submitAuthForm(randomEmail, password);
     cy.contains(`${randomEmail.split("@")[0]}'s Profile`);
 
     cy.withdrawal();
+
+    // Toggle: Regist -> Login
+    cy.swithAuthMode();
+    // No exist user
+    cy.submitAuthForm(randomEmail, password);
+    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.");
   });
 });

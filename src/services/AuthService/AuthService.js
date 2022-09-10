@@ -59,8 +59,12 @@ const refresh = (callback) => {
   AuthRepository.checkAuthState(callback);
 };
 
-const saveProfile = (profile, successCallback, errorCallack) => {
-  AuthRepository.saveProfile(profile, successCallback, errorCallack);
+const saveProfile = (profile, successCallback, errorCallback) => {
+  AuthRepository.saveProfile(profile, successCallback, errorCallback);
+};
+
+const withdrawal = (successCallback, errorCallback) => {
+  AuthRepository.removeUser(successCallback, errorCallback);
 };
 
 const AuthService = {
@@ -69,7 +73,8 @@ const AuthService = {
   popupLogin,
   logout,
   refresh,
-  saveProfile
+  saveProfile,
+  withdrawal
 };
 
 export default AuthService;
