@@ -5,18 +5,14 @@ describe("Auth / Login", () => {
   const password = "Cypress*P@SSWORD";
 
   beforeEach(() => {
-    cy.clearCookies();
-    cy.clearLocalStorage();
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
-    cy.visit("/");
+    cy.removeAllCaches();
   });
 
   it(`Step1. Register & Logout - ${randomEmail}`, () => {
     cy.submitAuthForm(randomEmail, password);
     cy.contains(`${randomEmail.split("@")[0]}'s Profile`);
 
-    cy.visit("/#/profile");
-    cy.get("#logout").click();
+    cy.logout();
   });
 
   it("Step2. Register error when same email", () => {
@@ -25,7 +21,8 @@ describe("Auth / Login", () => {
   });
 
   it("Step3. Login error when wrong info", () => {
-    cy.swithAuthForm();
+    // Toggle: Regist -> Login
+    cy.swithAuthMode();
 
     // No exist user
     cy.submitAuthForm(`wrong-${randomEmail}`, `wrong-${password}`);
@@ -48,20 +45,16 @@ describe("Auth / Login", () => {
           throw new Error(`[ERROR] No covered cases: ${resultMessage}`);
         }
       });
+  });
+
+  it(`Step4. Withdrawal after login- ${randomEmail}`, () => {
+    // Toggle: Regist -> Login
+    cy.swithAuthMode();
 
     // Exist user wiht right password
     cy.submitAuthForm(randomEmail, password);
-    cy.contains("이메일 또는 비밀번호를 다시 한번 확인해주세요.")
-      .should("not.exist");
-  });
-
-  it(`Step4. Withdrawal - ${randomEmail}`, () => {
-    cy.swithAuthForm();
-
-    cy.submitAuthForm(randomEmail, password);
     cy.contains(`${randomEmail.split("@")[0]}'s Profile`);
 
-    cy.visit("/#/profile");
-    cy.get("#withdrawal").click();
+    cy.withdrawal();
   });
 });

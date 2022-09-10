@@ -1,9 +1,6 @@
 describe("Auth / SocialLogin", () => {
   beforeEach(() => {
-    cy.clearCookies();
-    cy.clearLocalStorage();
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
-    cy.visit("/");
+    cy.removeAllCaches();
   });
 
   it("should be success 'popup login' with Google", () => {

@@ -1,11 +1,8 @@
 describe("Landing", () => {
   beforeEach(() => {
-    cy.clearCookies();
-    cy.clearLocalStorage();
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
-    cy.visit("/");
+    cy.removeAllCaches();
   });
-  
+
   it("should be rendered default components - navigator, footer", () => {
     cy.get("nav").get("a").should("have.attr", "href", "#/");
     cy.get("footer").contains("© 2022 Nwitter by Chloe");
@@ -17,12 +14,12 @@ describe("Landing", () => {
     cy.get("input[name=password]").should("be.empty").invoke("attr", "placeholder").should("eq", "Password");
     cy.checkAuthForm("Create Account", "Sign In");
 
-    // Toggle
-    cy.swithAuthForm();
+    // Toggle: Regist -> Login
+    cy.swithAuthMode();
     cy.checkAuthForm("Login", "Create Account");
 
-    // Reset
-    cy.swithAuthForm();
+    // Toggle: Login -> Regist
+    cy.swithAuthMode();
     cy.checkAuthForm("Create Account", "Sign In");
 
     // SSO

@@ -8,7 +8,20 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-Cypress.Commands.add("swithAuthForm", () => {
+/*
+  # Common
+ */
+Cypress.Commands.add("removeAllCaches", () => {
+  cy.clearCookies();
+  cy.clearLocalStorage();
+  indexedDB.deleteDatabase("firebaseLocalStorageDb");
+  cy.visit("/");
+});
+
+/*
+  # Toggling
+ */
+Cypress.Commands.add("swithAuthMode", () => {
   cy.toggle("#signUpToggle");
 });
 
@@ -16,9 +29,15 @@ Cypress.Commands.add("toggle", (id) => {
   cy.get(id).click();
 });
 
-Cypress.Commands.add("checkAuthForm", (submitButtonPresent, togglePresent) => {
-  cy.get("input[type=submit]").should("have.value", submitButtonPresent);
-  cy.get("#signUpToggle").should("have.value", togglePresent);
+/*
+  # Authentication
+ */
+
+Cypress.Commands.add("registNewUser", () => {
+  const timestamp = Math.floor(+ new Date() / 1000);
+  const randomEmail = `auto_ui_tester-no.${timestamp}@nwitter.com`;
+  const password = "Cypress*P@SSWORD";
+  cy.submitAuthForm(randomEmail, password);
 });
 
 Cypress.Commands.add("submitAuthForm", (email, password) => {
@@ -29,4 +48,19 @@ Cypress.Commands.add("submitAuthForm", (email, password) => {
 
 Cypress.Commands.add("clickSubmit", () => {
   cy.get("input[type=submit]").click();
+});
+
+Cypress.Commands.add("checkAuthForm", (submitButtonPresent, togglePresent) => {
+  cy.get("input[type=submit]").should("have.value", submitButtonPresent);
+  cy.get("#signUpToggle").should("have.value", togglePresent);
+});
+
+Cypress.Commands.add("logout", () => {
+  cy.visit("/#/profile");
+  cy.get("#logout").click();
+});
+
+Cypress.Commands.add("withdrawal", () => {
+  cy.visit("/#/profile");
+  cy.get("#withdrawal").click();
 });
