@@ -9,6 +9,7 @@ const LogoutButton = ({ refreshUser }) => {
   };
   return (
     <button
+      id="logout"
       className={`form_btn cancel_btn ${style.logout}`}
       onClick={logout}
     >
