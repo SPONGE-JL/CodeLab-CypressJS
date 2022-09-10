@@ -1,3 +1,5 @@
+import "cypress-file-upload";
+
 /* eslint-disable cypress/no-unnecessary-waiting */
 // ***********************************************
 // This example commands.js shows you how to
@@ -31,6 +33,22 @@ Cypress.Commands.add("toggle", (id) => {
 });
 
 /*
+  # File upload
+ */
+Cypress.Commands.add("uploadFile", (inputId, fixturePath) => {
+  cy.fixture(fixturePath, "binary")
+    .then(Cypress.Blob.binaryStringToBlob)
+    .then(fileContent => {
+      cy.get(`input#${inputId}`).attachFile({
+        fileContent,
+        filePath: fixturePath,
+        encoding: "utf-8",
+        lastModified: new Date().getTime()
+      });
+    });
+});
+
+/*
   # Authentication
  */
 
@@ -39,7 +57,7 @@ Cypress.Commands.add("registNewUser", () => {
   const randomEmail = `auto_ui_tester-no.${timestamp}@nwitter.com`;
   const password = "Cypress*P@SSWORD";
   cy.submitAuthForm(randomEmail, password);
-  cy.wait(1500);
+  cy.wait(2000);
 });
 
 Cypress.Commands.add("submitAuthForm", (email, password) => {

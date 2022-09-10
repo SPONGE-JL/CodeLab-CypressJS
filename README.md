@@ -235,6 +235,15 @@ npx create-react-app hangout-nwitter-with-nomad
 
       check [`.eslintrc.js`](./.eslintrc.js)
 
+    - add support for cypress
+
+      ```bash
+      # Support file upload
+      npm install --save-dev cypress-file-upload
+      ```
+
+      then insert `import 'cypress-file-upload';` at [`cypress/support/commands.js`](cypress/support/commands.js#L1)
+
 ## certification
 
 [![certification](certification/certification.png)](https://nomadcoders.co/certs/13aeb294-9d04-4a3c-9eff-a7952f609fc2)

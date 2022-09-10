@@ -27,20 +27,18 @@ const NweetForm = ({ userObj }) => {
   };
 
   return (
-    <>
-      <form onSubmit={updateNewNweet} className={style.form}>
-        <InputContainer nweetText={nweetText} setNweetText={setNweetText} />
-        <AttachmentButton fileInput={fileInput} setNweetImage={setNweetImage} />
-        {
-          nweetImage &&
+    <form onSubmit={updateNewNweet} className={style.form}>
+      <InputContainer nweetText={nweetText} setNweetText={setNweetText} />
+      <AttachmentButton fileInput={fileInput} setNweetImage={setNweetImage} />
+      {
+        nweetImage &&
           <Attachment
             nweetImage={nweetImage}
             setNweetImage={setNweetImage}
             fileInput={fileInput}
           />
-        }
-      </form>
-    </>
+      }
+    </form>
   );
 };
 

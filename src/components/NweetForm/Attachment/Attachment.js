@@ -12,7 +12,7 @@ const Attachment = ({ nweetImage, setNweetImage, fileInput }) => {
   return (
     <div className={style.attachment}>
       <img src={nweetImage} alt="img" style={{ backgroundImage: nweetImage }} />
-      <button className={style.form_clear} onClick={onClearAttachment}>
+      <button ui-test-id="remote-attach" className={style.form_clear} onClick={onClearAttachment}>
         <span>Remove</span>
         <FontAwesomeIcon icon={faTimes} />
       </button>
