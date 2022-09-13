@@ -1,5 +1,3 @@
-import "cypress-file-upload";
-
 /* eslint-disable cypress/no-unnecessary-waiting */
 // ***********************************************
 // This example commands.js shows you how to
@@ -10,43 +8,6 @@ import "cypress-file-upload";
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-
-/*
-  # Common
- */
-Cypress.Commands.add("removeAllCaches", () => {
-  cy.clearCookies();
-  cy.clearLocalStorage();
-  indexedDB.deleteDatabase("firebaseLocalStorageDb");
-  cy.visit("/");
-});
-
-/*
-  # Toggling
- */
-Cypress.Commands.add("swithAuthMode", () => {
-  cy.toggle("#signUpToggle");
-});
-
-Cypress.Commands.add("toggle", (id) => {
-  cy.get(id).click();
-});
-
-/*
-  # File upload
- */
-Cypress.Commands.add("uploadFile", (inputId, fixturePath) => {
-  cy.fixture(fixturePath, "binary")
-    .then(Cypress.Blob.binaryStringToBlob)
-    .then(fileContent => {
-      cy.get(`input#${inputId}`).attachFile({
-        fileContent,
-        filePath: fixturePath,
-        encoding: "utf-8",
-        lastModified: new Date().getTime()
-      });
-    });
-});
 
 /*
   # Authentication
